@@ -18,11 +18,12 @@ function PhotoList() {
 
   const fetchPhotos = async () => {
     try {
+      var resp = "";
       if (search) {
         setSavedQueries([...new Set([search, ...savedQueries])]);
         localStorage.setItem("savedQueries", JSON.stringify(savedQueries));
 
-        var resp = await axios.get(`https://www.flickr.com/services/rest/`, {
+        resp = await axios.get(`https://www.flickr.com/services/rest/`, {
           params: {
             method: "flickr.photos.search",
             api_key: searchApiKey,
@@ -33,7 +34,7 @@ function PhotoList() {
           },
         });
       } else {
-        var resp = await axios.get(`https://www.flickr.com/services/rest/`, {
+        resp = await axios.get(`https://www.flickr.com/services/rest/`, {
           params: {
             method: "flickr.photos.getRecent",
             api_key: photosKey,
